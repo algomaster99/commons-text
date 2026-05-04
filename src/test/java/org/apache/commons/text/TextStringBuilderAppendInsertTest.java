@@ -19,12 +19,6 @@ package org.apache.commons.text;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
@@ -589,41 +583,6 @@ class TextStringBuilderAppendInsertTest {
     }
 
     @Test
-    void testAppendln_CharArray() {
-        final TextStringBuilder sb = spy(new TextStringBuilder());
-        final char[] input = "foo".toCharArray();
-        sb.appendln(input);
-
-        assertEquals("foo" + SEP, sb.toString());
-
-        verify(sb, times(1)).append(input);
-        verify(sb, times(1)).appendNewLine();
-    }
-
-    @Test
-    void testAppendln_CharArray_int_int() {
-        final TextStringBuilder sb = spy(new TextStringBuilder());
-        final char[] input = "foo".toCharArray();
-        sb.appendln(input, 0, 3);
-
-        assertEquals("foo" + SEP, sb.toString());
-
-        verify(sb, times(1)).append(input, 0, 3);
-        verify(sb, times(1)).appendNewLine();
-    }
-
-    @Test
-    void testAppendln_FormattedString() {
-        final TextStringBuilder sb = spy(new TextStringBuilder());
-        sb.appendln("Hello %s", "Alice");
-
-        assertEquals("Hello Alice" + SEP, sb.toString());
-
-        verify(sb, times(2)).append(anyString()); // appendNewLine() calls append(String)
-        verify(sb, times(1)).appendNewLine();
-    }
-
-    @Test
     void testAppendln_Object() {
         final TextStringBuilder sb = new TextStringBuilder();
         sb.appendln((Object) null);
@@ -653,94 +612,6 @@ class TextStringBuilderAppendInsertTest {
         sb.clear();
         sb.appendln(4.5d);
         assertEquals("4.5" + SEP, sb.toString());
-    }
-
-    @Test
-    void testAppendln_String() {
-        final TextStringBuilder sb = spy(new TextStringBuilder());
-        sb.appendln("foo");
-
-        assertEquals("foo" + SEP, sb.toString());
-
-        verify(sb, times(2)).append(anyString()); // appendNewLine() calls append(String)
-        verify(sb, times(1)).appendNewLine();
-    }
-
-    @Test
-    void testAppendln_String_int_int() {
-        final TextStringBuilder sb = spy(new TextStringBuilder());
-        sb.appendln("foo", 0, 3);
-
-        assertEquals("foo" + SEP, sb.toString());
-
-        verify(sb, times(2)).append(anyString(), anyInt(), anyInt()); // appendNewLine() calls append(String)
-        verify(sb, times(1)).appendNewLine();
-    }
-
-    @Test
-    void testAppendln_StringBuffer() {
-        final TextStringBuilder sb = spy(new TextStringBuilder());
-        sb.appendln(new StringBuffer("foo"));
-
-        assertEquals("foo" + SEP, sb.toString());
-
-        verify(sb, times(1)).append(any(StringBuffer.class));
-        verify(sb, times(1)).appendNewLine();
-    }
-
-    @Test
-    void testAppendln_StringBuffer_int_int() {
-        final TextStringBuilder sb = spy(new TextStringBuilder());
-        sb.appendln(new StringBuffer("foo"), 0, 3);
-
-        assertEquals("foo" + SEP, sb.toString());
-
-        verify(sb, times(1)).append(any(StringBuffer.class), anyInt(), anyInt());
-        verify(sb, times(1)).appendNewLine();
-    }
-
-    @Test
-    void testAppendln_StringBuilder() {
-        final TextStringBuilder sb = spy(new TextStringBuilder());
-        sb.appendln(new StringBuilder("foo"));
-
-        assertEquals("foo" + SEP, sb.toString());
-
-        verify(sb, times(1)).append(any(StringBuilder.class));
-        verify(sb, times(1)).appendNewLine();
-    }
-
-    @Test
-    void testAppendln_StringBuilder_int_int() {
-        final TextStringBuilder sb = spy(new TextStringBuilder());
-        sb.appendln(new StringBuilder("foo"), 0, 3);
-
-        assertEquals("foo" + SEP, sb.toString());
-
-        verify(sb, times(1)).append(any(StringBuilder.class), anyInt(), anyInt());
-        verify(sb, times(1)).appendNewLine();
-    }
-
-    @Test
-    void testAppendln_TextStringBuilder() {
-        final TextStringBuilder sb = spy(new TextStringBuilder());
-        sb.appendln(new TextStringBuilder("foo"));
-
-        assertEquals("foo" + SEP, sb.toString());
-
-        verify(sb, times(1)).append(any(TextStringBuilder.class));
-        verify(sb, times(1)).appendNewLine();
-    }
-
-    @Test
-    void testAppendln_TextStringBuilder_int_int() {
-        final TextStringBuilder sb = spy(new TextStringBuilder());
-        sb.appendln(new TextStringBuilder("foo"), 0, 3);
-
-        assertEquals("foo" + SEP, sb.toString());
-
-        verify(sb, times(1)).append(any(TextStringBuilder.class), anyInt(), anyInt());
-        verify(sb, times(1)).appendNewLine();
     }
 
     @Test

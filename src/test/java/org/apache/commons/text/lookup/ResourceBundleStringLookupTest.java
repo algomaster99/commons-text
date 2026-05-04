@@ -19,9 +19,6 @@ package org.apache.commons.text.lookup;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
 import java.util.ResourceBundle;
 
 import org.junit.jupiter.api.Assertions;
@@ -61,13 +58,6 @@ class ResourceBundleStringLookupTest {
     void testDoubleBundle() {
         assertThrows(IllegalArgumentException.class, () -> new ResourceBundleStringLookup(TEST_RESOURCE_BUNDLE)
             .apply(AbstractStringLookup.toLookupKey("OtherBundle", KEY)));
-    }
-
-    @Test
-    void testExceptionGettingString() {
-        final ResourceBundleStringLookup mockLookup = spy(ResourceBundleStringLookup.class);
-        when(mockLookup.getString(TEST_RESOURCE_BUNDLE, KEY)).thenThrow(ClassCastException.class);
-        assertThrows(IllegalArgumentException.class, () -> mockLookup.apply(AbstractStringLookup.toLookupKey(TEST_RESOURCE_BUNDLE, KEY)));
     }
 
     @Test

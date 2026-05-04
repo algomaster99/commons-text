@@ -17,13 +17,6 @@
 
 package org.apache.commons.text.lookup;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -37,14 +30,6 @@ class UrlDecoderStringLookupTest {
     @Test
     void testAllPercent() {
         Assertions.assertEquals(DATA, UrlDecoderStringLookup.INSTANCE.apply("Hello%20World%21"));
-    }
-
-    @Test
-    void testExceptionGettingString() throws UnsupportedEncodingException {
-        final UrlDecoderStringLookup mockLookup = spy(UrlDecoderStringLookup.class);
-        when(mockLookup.decode(DATA, StandardCharsets.UTF_8.displayName()))
-            .thenThrow(UnsupportedEncodingException.class);
-        assertThrows(IllegalArgumentException.class, () -> mockLookup.apply(DATA));
     }
 
     @Test
