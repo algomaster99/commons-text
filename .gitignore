@@ -19,3 +19,5 @@ site-content
 .externalToolBuilders
 /.checkstyle
 /.DS_Store
+
+cache.aot
